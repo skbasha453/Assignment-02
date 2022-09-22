@@ -1,0 +1,34 @@
+---
+title: "Bad Drivers"
+author: "Sowmya"
+date: "9/15/2022"
+output: word_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Section 1: Description of the data
+The Bad Drivers data set consists of 51 observations of 8 variables. Each observation contains data about road accidents in a US State. The variables include "State", "Number of drivers involved in fatal collisions per billion miles", "Percentage Of Drivers Involved In Fatal Collisions Who Were Speeding", "Percentage Of Drivers Involved In Fatal Collisions Who Were Alcohol-Impaired",	"Percentage Of Drivers Involved In Fatal Collisions Who Were Not Distracted", "Percentage Of Drivers Involved In Fatal Collisions Who Had Not Been Involved In Any Previous Accidents",	"Car Insurance Premiums ($)" and "Losses incurred by insurance companies for collisions per insured driver ($)" 
+
+
+## Section 2: Reading the data into R
+```{r}
+data <- read.csv(("https://raw.githubusercontent.com/fivethirtyeight/data/master/bad-drivers/bad-drivers.csv"))
+head(data)
+```
+
+
+## Section 3:Clean the data
+```{r}
+sum(is.na(data))
+```
+
+
+```{r}
+Summary_data <- subset(airline_data, SELECT = -C(incidents(2000-2014), fatal_accidents(2000-2014),fatalities(2000-2014)))  
+Summary_data
+summary(Summary_data)
+```
+
