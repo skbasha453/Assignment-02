@@ -1,7 +1,7 @@
 ---
-title: "Bad Drivers"
-author: "Sowmya"
-date: "9/15/2022"
+title: "Airplane Safety"
+author: "Shaik"
+date: "2022-09-15"
 output: word_document
 ---
 
@@ -9,26 +9,46 @@ output: word_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## Section 1: Description of the data
-The Bad Drivers data set consists of 51 observations of 8 variables. Each observation contains data about road accidents in a US State. The variables include "State", "Number of drivers involved in fatal collisions per billion miles", "Percentage Of Drivers Involved In Fatal Collisions Who Were Speeding", "Percentage Of Drivers Involved In Fatal Collisions Who Were Alcohol-Impaired",	"Percentage Of Drivers Involved In Fatal Collisions Who Were Not Distracted", "Percentage Of Drivers Involved In Fatal Collisions Who Had Not Been Involved In Any Previous Accidents",	"Car Insurance Premiums ($)" and "Losses incurred by insurance companies for collisions per insured driver ($)" 
+# Description of the data
 
+The airline safety data set contains data about the safety of different airlines from 1985 to 2014. The dataset is divided into two where the first 15 years (1985 - 1999) are placed in their own columns while the second 15 years (2000 - 2014) have separate columns. The data set contains 3 safety variables (number of incidents), number of fatal accidents and number of fatalities for each of the two time periods.In total, the dataset has 56 observations, each observation being a unique airline, and 8 variables.
 
-## Section 2: Reading the data into R
 ```{r}
-data <- read.csv(("https://raw.githubusercontent.com/fivethirtyeight/data/master/bad-drivers/bad-drivers.csv"))
-head(data)
+#read data using read.csv
+airline_data <- read.csv(("https://raw.githubusercontent.com/fivethirtyeight/data/master/airline-safety/airline-safety.csv"))
+#clean data (rename columns)
+head(airline_data)
+
+#Checking Structures
+str(airline_data)
+
+
 ```
 
-
-## Section 3:Clean the data
-```{r}
-sum(is.na(data))
-```
-
+# Renaming Columns and Selecting variables
 
 ```{r}
+#Loading dplyr package 
+library(dplyr)
+
+#Renaming Variables
+airline_data <- airline_data %>%
+  rename("incidents(1985-1999)"= "incidents_85_99",
+         "fatal_accidents(1985-1999)" = "fatal_accidents_85_99",
+         "fatalities(1985-1999)" = "fatalities_85_99",
+         "incidents(2000-2014)" = "incidents_00_14",
+         "fatal_accidents(2000-2014)" = "fatal_accidents_00_14",
+         "fatalities(2000-2014)" = "fatalities_00_14")
+
+#Variable Selection
 Summary_data <- subset(airline_data, SELECT = -C(incidents(2000-2014), fatal_accidents(2000-2014),fatalities(2000-2014)))  
 Summary_data
-summary(Summary_data)
+
+
 ```
 
+# Summary Statistics
+
+```{r}
+summary(Summary_data)
+```
